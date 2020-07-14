@@ -1,0 +1,9 @@
+﻿@{
+    
+    if(Context.User.Identity.IsAuthenticated == true)
+    {
+        Layout ="_AdminLayout";
+    }else{
+        Layout = "_Layout";
+    }
+}

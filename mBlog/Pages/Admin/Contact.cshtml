@@ -1,0 +1,53 @@
+@page "{id:int?}"
+@model ContactModel
+@{
+    ViewData["Title"] = "Admin Manage Contact Page";
+}
+
+@section mastHeader{
+  <header class="masthead" style="background-image: url('../img/contact-bg.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+      <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+              <h1>Manage Contact Messages</h1>
+              <span class="subheading">Browser Manage Each Contact Message</span>
+          </div>
+          </div>
+      </div>
+      </div>
+  </header>
+}
+
+ <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        @foreach(var contact in Model.ContactInfoList)
+        {
+          <div class="post-preview">
+            <a href="#">
+                <h2 class="post-title">
+                    @Html.DisplayFor(modelItem => contact.Email)
+                </h2>
+                <h3 class="post-preview">
+                    @Html.DisplayFor(modelItem => contact.ContactMessage)
+                </h3>
+            </a>
+            <p class="post-meta">Posted by
+                <a href="#">@Html.DisplayFor(modelItem => contact.ContactName) </a>
+            </p>
+          </div>
+          <hr>
+        }
+        <!-- Pager -->
+        <div class="clearfix">
+          <form method="GET">
+            <a class="btn btn-primary float-left" asp-page-handler="PrevPage" asp-route-pageNumber = "@Model.PaginationSection.CurrentPageNumber" >&larr; Prev Posts</a>
+            <a class="btn btn-primary float-right" asp-page-handler="NextPage" asp-route-pageNumber = "@Model.PaginationSection.CurrentPageNumber" >Older Posts &rarr;</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

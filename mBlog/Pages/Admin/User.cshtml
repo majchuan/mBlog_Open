@@ -1,0 +1,67 @@
+@page "{id:int?}"
+@model UserModel
+@{
+    ViewData["Title"] = "Admin Manage Contact Page";
+}
+
+@section mastHeader{
+  <header class="masthead" style="background-image: url('../img/about-bg.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+      <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+              <h1>Manage Admin password</h1>
+              <span class="subheading">Update your admin password regular every three months</span>
+          </div>
+          </div>
+      </div>
+      </div>
+  </header>
+}
+
+ <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <p>@Html.DisplayFor(modelItem => @Model.Message)</p>
+        <form name="sentPassword" id="passwordForm" novalidate method="POST" asp-route-id="@Model.BlogAdminUser.Id" >
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>User Name</label>
+              <input type="text" class="form-control" placeholder="user name" id="userName" name="userName"
+              required data-validation-required-message="Please enter your new user name." value="@Model.BlogAdminUser.Username" />
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Current Password</label>
+              <input type="password" class="form-control" placeholder="Current Password" id="oldPassword" name="oldPassword"
+              required data-validation-required-message="Please enter your current password." />
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>New Password</label>
+              <input type="password" class="form-control" placeholder="enter new password" id="newPassword" name="newPassword"
+              required data-validation-required-message="Please enter your new password." />
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>New Password confirmation</label>
+              <input type="password" class="form-control" placeholder="enter new passwordd again" id="newConfirmationPassword" name="newConfirmationPassword"
+              required data-validation-required-message="Please enter your new password again." />
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <br>
+          <div id="success"></div>
+          <button type="submit" class="btn btn-primary" id="updatePasswordButton">Send</button>
+        </form>
+      </div>
+    </div>
+  </div>

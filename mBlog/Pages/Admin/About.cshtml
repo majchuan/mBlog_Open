@@ -1,0 +1,50 @@
+@page 
+@model AboutModel
+
+@section mastHeader{
+  <header class="masthead" style="background-image: url('../img/home-bg.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+      <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+              <h1>Manage User Introduction</h1>
+              <span class="subheading">Click to Edit User Introduction</span>
+          </div>
+          </div>
+      </div>
+      </div>
+  </header>
+}
+ 
+ <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div id="success"></div>
+        <a class="btn btn-primary float-right" asp-page="/Admin/ManageAbout">New Post &rarr;</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        @foreach(var userInfo in Model.UserInfoList)
+        {
+          <div class="post-preview">
+          <a asp-page="/Admin/ManageAbout" asp-route-id ="@userInfo.Id">
+            <h2 class="post-title">
+              @Html.DisplayFor(modelItem => userInfo.UserTitle)
+            </h2>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">@Html.DisplayFor(modelItem => @Model.BlogUser.Username ) </a>
+          </div>
+          <hr>
+        }
+        <!-- Pager -->
+        <div class="clearfix">
+          <a class="btn btn-primary float-left" asp-page-handler="PrevPage" asp-route-pageNumber = "@Model.PaginationSection.CurrentPageNumber" >Prev Post &rarr;</a>
+          <a class="btn btn-primary float-right" asp-page-handler="NextPage" asp-route-pageNumber = "@Model.PaginationSection.CurrentPageNumber" >Older Posts &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>

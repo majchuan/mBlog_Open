@@ -1,0 +1,60 @@
+@page "{id:int?}"
+@model ManageBlogModel
+
+@section mastHeader{
+<!-- Page Header -->
+  <header class="masthead" style="background-image: url('../../img/post-sample-image.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Manage Blog Markdown Content</h1>
+            <span class="subheading">Enter blog by Markdown Format</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+}
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
+        <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
+        <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+        <form name="sentNewBlog" id="blogForm" novalidate method="POST">
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Blog Title</label>
+              <input type="text" class="form-control" placeholder="Blog Title" id="BlogTitle" required data-validation-required-message="Blog Title." 
+              asp-for="BlogDetail.BlogTitle" />
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Blog Sub Title</label>
+              <input type="text" class="form-control" placeholder="Blog Sub Title" id="BlogSubTitle" required data-validation-required-message="Blog Sub Title." 
+              asp-for="BlogDetail.BlogSubTitle" />
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Markdown Content</label>
+              <textarea rows="25" class="form-control-aboutMe" placeholder="Blog Text" id="BlogText" required data-validation-required-message="Blog Content."
+              asp-for="BlogDetail.BlogText" ></textarea>
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <br>
+          <div id="success"></div>
+          <button type="submit" class="btn btn-primary" id="saveButton" asp-page-handler="Save"  asp-route-id="@Model.BlogDetail.Id">Save</button>
+          <button type="submit" class="btn btn-primary" id="deleteButton" asp-page-handler="Delete" asp-route-id="@Model.BlogDetail.Id">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>

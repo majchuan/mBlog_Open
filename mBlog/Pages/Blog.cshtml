@@ -1,0 +1,87 @@
+@page "{id:int?}"
+@model BlogModel
+@{
+    ViewData["Title"] = "Blog";
+}
+
+@section mastHeader{
+ <!-- Page Header -->
+  <header class="masthead" style="background-image: url('/img/post-sample-image.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-heading">
+            <h1>@Html.DisplayFor(modelItem => Model.BlogDetail.BlogTitle) </h1>
+            <h2 class="subheading"> @Html.DisplayFor(modelItme => Model.BlogDetail.BlogSubTitle) </h2>
+            <span class="meta">Posted by
+              <a href="#">@Html.DisplayFor(modelItem => Model.BlogUser.Username)</a>
+              @Html.DisplayFor(modelItem => Model.BlogDetail.CreateTime)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+}
+
+  <!-- Post Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          @Html.Raw(Model.BlogDetail.BlogText)
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <hr>
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <h4>Comments</h4>
+          <span class="caption text-muted">To go places and do things that have never been done before – that’s what living is all about</span>
+          @if(Model.BlogDetail.Comment != null){
+            @foreach (var item in Model.BlogDetail.Comment)
+            {
+              <p>Created By <h5>@Html.DisplayFor(modelItem => item.CommentUser)</h5> Replay @Html.DisplayFor(modelItem => item.CreateTime) </p>
+              <p>@Html.DisplayFor(modelItem => item.CommentText)</p>
+              <hr>
+            }
+          }
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <hr>
+  <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <h4>Please leave your comment</h4>
+          <form name="sentComment" id="commentForm" novalidate method="POST" asp-page-id="@Model.BlogDetail.Id" >
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>Name</label>
+                <input type="text" class="form-control" placeholder="Name" id="ContactName" required data-validation-required-message="Please enter your name." 
+                asp-for="BlogComment.CommentUser" />
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>Message</label>
+                <textarea rows="5" class="form-control" placeholder="Message" id="ContactMessage" required data-validation-required-message="Please enter a message."
+                asp-for="BlogComment.CommentText" ></textarea>
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <br>
+            <div id="success"></div>
+            <button type="submit" class="btn btn-primary" id="sendCommentMessage">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>  
+  <hr>

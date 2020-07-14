@@ -1,0 +1,51 @@
+﻿@page 
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@section mastHeader{
+  <header class="masthead" style="background-image: url('/img/home-bg.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+                <h1>Daily Life Blog</h1>
+                <span class="subheading">All about life</span>
+            </div>
+            </div>
+        </div>
+        </div>
+    </header>
+}
+  
+ <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        @foreach(var blog in Model.BlogList)
+        {
+          <div class="post-preview">
+          <a asp-page="./Blog" asp-route-id ="@blog.Id">
+            <h2 class="post-title">
+              @Html.DisplayFor(modelItem => blog.BlogTitle)
+            </h2>
+            <h3 class="post-subtitle">
+              @Html.DisplayFor(modelItem => blog.BlogSubTitle)
+            </h3>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">@Html.DisplayFor(modelItem => Model.BlogUser.Username) </a>
+            @Html.DisplayFor(modelItem => blog.CreateTime) </p>
+          </div>
+          <hr>
+        }
+        <!-- Pager -->
+        <div class="clearfix">
+          <a class="btn btn-primary float-left"  asp-page-handler="PrevPage" asp-route-pageNumber = "@Model.PaginationSection.CurrentPageNumber">&larr; Prev Posts</a>
+          <a class="btn btn-primary float-right" asp-page-handler="NextPage" asp-route-pageNumber = "@Model.PaginationSection.CurrentPageNumber">Older Posts &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>

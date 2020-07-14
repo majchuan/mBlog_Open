@@ -1,0 +1,52 @@
+@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Login System";
+}
+
+@section mastHeader{
+  <header class="masthead" style="background-image: url('../img/about-bg.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+      <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+              <h1>mBlog</h1>
+              <span class="subheading">Login into system</span>
+          </div>
+          </div>
+      </div>
+      </div>
+  </header>
+}
+ 
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        
+        <form name="loginForm" id="loginForm" novalidate method="POST">
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>User Email</label>
+              <input type="email" class="form-control" placeholder="User Email" id="userEmail" name="userEmail" 
+              required data-validation-required-message="Please enter your email.">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Password</label>
+              <input type="password" class="form-control" placeholder="Password" id="password" name="password" 
+              required data-validation-required-message="Please enter your password.">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <br>
+          <div id="success"></div>
+            <button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
