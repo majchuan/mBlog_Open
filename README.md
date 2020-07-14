@@ -3,10 +3,10 @@
 ## Personal project blog with razor page asp.net core.
 
 Write by 
--Asp.net core razor pages. 
--entityframeworkcore
--postgresql
--markdig
+- Asp.net core razor pages. 
+- entityframeworkcore
+- postgresql
+- markdig
 
 Honestly Asp.net core rezor page app is light weight of asp.net core mvc. it is easy to use to set up your personal application.
 
