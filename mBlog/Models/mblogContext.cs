@@ -186,6 +186,8 @@ namespace mBlog.Models
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.UserIntro).HasColumnName("user_intro");
+
+                entity.Property(e => e.UserTitle).HasColumnName("user_title");
             });
 
             OnModelCreatingPartial(modelBuilder);

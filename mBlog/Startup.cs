@@ -12,6 +12,12 @@ using mBlog.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using Npgsql;
+using Microsoft.AspNetCore.HttpOverrides;
+using Google.Cloud.AspNetCore.DataProtection.Kms;
+using Google.Cloud.AspNetCore.DataProtection.Storage;
+using Microsoft.AspNetCore.DataProtection;
+using mBlog.Service;
 
 namespace mBlog
 {
@@ -27,6 +33,19 @@ namespace mBlog
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+             services.AddDataProtection()
+                // Store keys in Cloud Storage so that multiple instances
+                // of the web application see the same keys.
+                .PersistKeysToGoogleCloudStorage(
+                    Configuration["DataProtection:Bucket"],
+                    Configuration["DataProtection:Object"])
+                // Protect the keys with Google KMS for encryption and fine-
+                // grained access control.
+                .ProtectKeysWithGoogleKms(
+                    Configuration["DataProtection:KmsKeyName"]);
+                    
+
             services.AddAuthentication(options => {
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -41,7 +60,14 @@ namespace mBlog
             services.AddRazorPages();
             services.AddDbContext<mblogContext>(optionBuilder => 
                 optionBuilder.UseNpgsql(
-                    Configuration.GetConnectionString("defaultConnection")
+                    //Configuration.GetConnectionString("defaultConnection")
+                    Configuration.GetConnectionString("cloudProdConnection")
+                    /*
+                    new NpgsqlConnectionStringBuilder(Configuration.GetConnectionString("cloudProdConnection"))
+                    {
+                        SslMode = SslMode.Disable 
+                    }.ConnectionString
+                    */
                     ));
        
         }
@@ -49,6 +75,14 @@ namespace mBlog
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseForwardedHeaders(new ForwardedHeadersOptions(){
+                ForwardedHeaders = ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedFor 
+            });
+            
+            app.UseForwardHttpToHttps(option =>{
+                option.SwitchForwardToHtttps = Convert.ToBoolean(Configuration["HttpForwardToHttps:switch"]);
+            });
+                      
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -59,7 +93,6 @@ namespace mBlog
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

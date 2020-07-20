@@ -3,3 +3,5 @@ mBlog_Create_Table.sql
 mBlog/bin/
 mBlog/obj/
 mBlog/appsettings.json
+mBlog/app.yaml
+

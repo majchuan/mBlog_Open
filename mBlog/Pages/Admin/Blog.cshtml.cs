@@ -35,7 +35,7 @@ namespace mBlog.Pages.Admin
         public ActionResult OnGet()
         {
             SetPageTitle();
-            PaginationSection = new Pagination(new List<Object>(_blogContext.Blog.ToList()), Pagination.FirstPage, null);
+            PaginationSection = new Pagination(new List<Object>(_blogContext.Blog.OrderByDescending(x => x.ModifyTime)), Pagination.FirstPage, null);
             BlogList = UsePagination(Pagination.FirstPage);
             PageNumber = Pagination.FirstPage ;
 
@@ -52,7 +52,7 @@ namespace mBlog.Pages.Admin
         public ActionResult OnGetNextPage(int pageNumber)
         {
             SetPageTitle();
-            PaginationSection = new Pagination(new List<Object>(_blogContext.Blog.ToList()), pageNumber, true);
+            PaginationSection = new Pagination(new List<Object>(_blogContext.Blog.OrderByDescending(x => x.ModifyTime) ), pageNumber, true);
             PageNumber = PaginationSection.CurrentPageNumber;
             BlogList = UsePagination(PageNumber);
 
@@ -68,7 +68,7 @@ namespace mBlog.Pages.Admin
         public ActionResult OnGetPrevPage(int pageNumber)
         {
             SetPageTitle();            
-            PaginationSection = new Pagination(new List<Object>(_blogContext.Blog.ToList()), pageNumber, false);
+            PaginationSection = new Pagination(new List<Object>(_blogContext.Blog.OrderByDescending(x => x.ModifyTime) ), pageNumber, false);
             PageNumber = PaginationSection.CurrentPageNumber;
             BlogList = UsePagination(PageNumber);
 

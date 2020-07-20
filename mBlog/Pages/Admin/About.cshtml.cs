@@ -33,7 +33,7 @@ namespace mBlog.Pages.Admin
         {
             SetPageTitle();
             PaginationSection = new Pagination(new List<Object>(
-                _blogContext.UserInformation.ToList().OrderByDescending(x => x.Id)), Pagination.FirstPage, null);
+                _blogContext.UserInformation.OrderByDescending(x => x.Id)), Pagination.FirstPage, null);
             BlogUser = _blogContext.BlogUser.FirstOrDefault();
             UserInfoList = UsePagination(Pagination.FirstPage);
 
@@ -45,11 +45,6 @@ namespace mBlog.Pages.Admin
             SetPageTitle();
             PaginationSection = new Pagination(new List<Object>(_blogContext.UserInformation.ToList()), pageNumber, true);
             UserInfoList = UsePagination(pageNumber);
-
-            if(UserInfoList == null || UserInfoList.Count == 0)
-            {
-                return NotFound();
-            }
 
             return Page();
         }

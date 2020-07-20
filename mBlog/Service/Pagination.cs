@@ -20,26 +20,43 @@ namespace mBlog.Service
         public Boolean? PageDirection {get;set;}
         public Pagination( IList<Object> aPageModelList, int currentPageNum , Boolean? pageDirection)
         {
+            if(aPageModelList == null)
+            {
+                aPageModelList = new List<Object>();
+            }
             PageModelList = aPageModelList ;
-            TotalPageNumber = Convert.ToInt32(Math.Ceiling( (double)PageModelList.Count / (double)Pagination.PageSize));
             PageDirection = pageDirection;
 
-            if(PageDirection == null)
+            TotalPageNumber = Convert.ToInt32(Math.Ceiling( (double)PageModelList.Count / (double)Pagination.PageSize));
+            
+            switch (pageDirection)
             {
-                CurrentPageNumber = Pagination.FirstPage ;
-            }else{
-                if(TotalPageNumber > currentPageNum)
-                {
-                    if(pageDirection == true)
+                case null: 
+                    CurrentPageNumber = Pagination.FirstPage;
+                    break;
+                case true:
+                    switch(currentPageNum)
                     {
-                        CurrentPageNumber = currentPageNum + 1 ;
-                    }else{
-                        CurrentPageNumber = Pagination.FirstPage >= currentPageNum ? Pagination.FirstPage : currentPageNum - 1 ;
+                        case int pageNumber when pageNumber < TotalPageNumber :
+                            CurrentPageNumber = pageNumber  + 1 ;
+                        break;
+                        case int pageNumber when pageNumber == TotalPageNumber :
+                            CurrentPageNumber = TotalPageNumber ;
+                        break;
                     }
-                }else if( TotalPageNumber <= currentPageNum)
-                {
-                    CurrentPageNumber = TotalPageNumber;
-                }
+                    break;
+                case false:
+                    switch(currentPageNum)
+                    {
+                        case int pageNumber when pageNumber > Pagination.FirstPage:
+                            CurrentPageNumber = pageNumber - 1 ;
+                            break;
+                        case int pageNumber when pageNumber == Pagination.FirstPage:
+                            CurrentPageNumber = Pagination.FirstPage ;
+                            break;
+                    }
+                    break;
+
             }
         }
 
