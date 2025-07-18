@@ -33,7 +33,7 @@ namespace mBlog
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            /*
              services.AddDataProtection()
                 // Store keys in Cloud Storage so that multiple instances
                 // of the web application see the same keys.
@@ -44,7 +44,7 @@ namespace mBlog
                 // grained access control.
                 .ProtectKeysWithGoogleKms(
                     Configuration["DataProtection:KmsKeyName"]);
-                    
+            */
 
             services.AddAuthentication(options => {
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -60,8 +60,8 @@ namespace mBlog
             services.AddRazorPages();
             services.AddDbContext<mblogContext>(optionBuilder => 
                 optionBuilder.UseNpgsql(
-                    //Configuration.GetConnectionString("defaultConnection")
-                    Configuration.GetConnectionString("cloudProdConnection")
+                    Configuration.GetConnectionString("defaultConnection")
+                    //Configuration.GetConnectionString("cloudProdConnection")
                     /*
                     new NpgsqlConnectionStringBuilder(Configuration.GetConnectionString("cloudProdConnection"))
                     {

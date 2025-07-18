@@ -5,11 +5,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (web)",
+            "name": ".NET Launch (web)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/mBlog/bin/Debug/netcoreapp3.1/mBlog.dll",
+            "program": "${workspaceFolder}/mBlog/bin/Debug/net9.0/mBlog.dll",
             "args": [],
             "cwd": "${workspaceFolder}/mBlog",
             "stopAtEntry": false,
@@ -25,7 +25,7 @@
             }
         },
         {
-            "name": ".NET Core Attach",
+            "name": ".NET Attach",
             "type": "coreclr",
             "request": "attach",
             "processId": "${command:pickProcess}"
