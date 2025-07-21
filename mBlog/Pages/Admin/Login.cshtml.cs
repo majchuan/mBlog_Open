@@ -47,10 +47,10 @@ namespace mBlog.Pages.Admin
             }else
             {
                 try{
-                    authenticationUser.LastLogin = DateTime.Now ;
+                    authenticationUser.LastLogin = DateTime.UtcNow;
                     _blogContext.BlogUser.Update(authenticationUser);
                     _blogContext.SaveChanges();
-                }catch(Exception)
+                }catch(Exception ex)
                 {
                     return NotFound();
                 }

@@ -52,12 +52,15 @@ namespace mBlog.Pages.Admin
 
         public ActionResult OnPostSave(int? id)
         {
-            var currentDateTime = DateTime.Now;
-            if(id == null || id == 0)
+            var currentDateTime = DateTime.UtcNow;
+            var maxId = _blogContext.Blog.Max(b => b.Id);
+            if (id == null || id == 0)
             {
                 BlogDetail.CreateTime = currentDateTime;
                 BlogDetail.ModifyTime = currentDateTime;
-            }else{
+            }
+            else
+            {
                 BlogDetail.ModifyTime = currentDateTime;
             }
             
@@ -66,6 +69,7 @@ namespace mBlog.Pages.Admin
             {
                 if(id == null || id == 0)
                 {
+                    BlogDetail.Id = maxId+1;
                     _blogContext.Blog.Add(BlogDetail);
                     _blogContext.SaveChanges();
                 }else{

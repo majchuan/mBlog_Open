@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace mBlog.Models
 {
@@ -9,7 +11,8 @@ namespace mBlog.Models
         {
             Comment = new HashSet<Comment>();
         }
-
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string BlogTitle { get; set; }
         public string BlogSubTitle { get; set; }

@@ -38,7 +38,7 @@ namespace mBlog.Models
             {
                 entity.ToTable("blog");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id").UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.BlogSubTitle)
                     .IsRequired()
@@ -64,14 +64,14 @@ namespace mBlog.Models
                 entity.ToTable("blog_user");
 
                 entity.HasIndex(e => e.Email)
-                    .HasName("blog_user_email_key")
+                    .HasDatabaseName("blog_user_email_key")
                     .IsUnique();
 
                 entity.HasIndex(e => e.Username)
-                    .HasName("blog_user_username_key")
+                    .HasDatabaseName("blog_user_username_key")
                     .IsUnique();
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id").UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.Email)
                     .IsRequired()
@@ -110,7 +110,7 @@ namespace mBlog.Models
 
                 entity.HasIndex(e => e.BlogId);
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id").UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.BlogId).HasColumnName("blog_id");
 
@@ -135,7 +135,7 @@ namespace mBlog.Models
             {
                 entity.ToTable("contact");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id").UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.ContactMessage)
                     .IsRequired()
@@ -156,7 +156,7 @@ namespace mBlog.Models
             {
                 entity.ToTable("role");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id").UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.RoleName)
                     .IsRequired()
@@ -168,7 +168,7 @@ namespace mBlog.Models
             {
                 entity.ToTable("social_media");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id").UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.SocialMediaAddress)
                     .HasColumnName("social_media_address")
@@ -183,7 +183,7 @@ namespace mBlog.Models
             {
                 entity.ToTable("user_information");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id").UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.UserIntro).HasColumnName("user_intro");
 
