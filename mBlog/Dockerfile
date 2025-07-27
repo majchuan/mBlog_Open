@@ -18,10 +18,10 @@ COPY --from=build /app/publish .
 
 #Expose default port
 EXPOSE 80
-EXPOSE 443
+#EXPOSE 443
 
-ENV ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
-ENV ASPNETCORE_Kestrel__Certificates__Default__Password=#
+#ENV ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+#ENV ASPNETCORE_Kestrel__Certificates__Default__Password=2016June01#
 
 
 #Set the entry point
