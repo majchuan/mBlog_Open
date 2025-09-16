@@ -60,7 +60,8 @@ namespace mBlog
             services.AddRazorPages();
             services.AddDbContext<mblogContext>(optionBuilder => 
                 optionBuilder.UseNpgsql(
-                    Configuration.GetConnectionString("defaultConnection")
+                    //Configuration.GetConnectionString("defaultConnection")
+                    Environment.GetEnvironmentVariable("Default_Connection")
                     //Configuration.GetConnectionString("cloudProdConnection")
                     /*
                     new NpgsqlConnectionStringBuilder(Configuration.GetConnectionString("cloudProdConnection"))
