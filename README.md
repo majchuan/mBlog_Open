@@ -12,7 +12,8 @@ Honestly Asp.net core rezor page app is light weight of asp.net core mvc. it is 
 
 this application now is able to create blogs ,self introduction, and manage your own security information.
 
-honestly it makes me memory back these old days using jsp structs etc. 
+Now use github action to push image into github registry image. 
+
 
 
 
