@@ -35,7 +35,7 @@ jobs:
         run: dotnet build mBlog/mBlog.csproj --configuration Release
 
       - name: Publish
-        run: dotnet publish mBlog/mBlog.csproj --configuration --output ./publish
+        run: dotnet publish mBlog/mBlog.csproj --configuration Release --output ./publish
       
       - name: Build Docker image
         run: docker build -t $IMAGE -f mBlog/Dockerfile .
