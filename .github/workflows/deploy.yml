@@ -6,7 +6,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE: ghcr.io/${{ secrets.GHCR_USERNAME}}/mBlog-app-1
+  IMAGE: ghcr.io/${{ secrets.GHCR_USERNAME}}/mblog-app-1
 
 jobs:
   build-and-deploy:
