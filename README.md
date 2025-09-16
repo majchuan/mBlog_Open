@@ -14,6 +14,8 @@ this application now is able to create blogs ,self introduction, and manage your
 
 Now use github action to push image into github registry image. 
 
+test
+
 
 
 
