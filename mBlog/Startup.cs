@@ -61,8 +61,7 @@ namespace mBlog
             services.AddDbContext<mblogContext>(optionBuilder => 
                 optionBuilder.UseNpgsql(
                     //Configuration.GetConnectionString("defaultConnection")
-                    //Configuration.GetValue<string>("DEFAULT_CONNECTION")
-                    "host=172.17.0.1;database=mablog;username=mblog_app_user;password=abc"
+                    Configuration.GetValue<string>("DEFAULT_CONNECTION")
                     //Configuration.GetConnectionString("cloudProdConnection")
                     /*
                     new NpgsqlConnectionStringBuilder(Configuration.GetConnectionString("cloudProdConnection"))
