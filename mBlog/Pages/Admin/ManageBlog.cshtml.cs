@@ -62,7 +62,7 @@ namespace mBlog.Pages.Admin
             else
             {
                 var createTime = _blogContext.Blog.Where(x => x.Id == maxId).FirstOrDefault().CreateTime;  
-                BlogDetail.CreateTime = createTime  ? createTime : currentDateTime;
+                BlogDetail.CreateTime = createTime ?? currentDateTime;
                 BlogDetail.ModifyTime = currentDateTime;
             }
             
