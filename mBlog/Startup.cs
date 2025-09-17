@@ -61,7 +61,7 @@ namespace mBlog
             services.AddDbContext<mblogContext>(optionBuilder => 
                 optionBuilder.UseNpgsql(
                     //Configuration.GetConnectionString("defaultConnection")
-                    Environment.GetEnvironmentVariable("Default_Connection")
+                    builder.Configuration.GetValue<string>("DEFAULT_CONNECTION")
                     //Configuration.GetConnectionString("cloudProdConnection")
                     /*
                     new NpgsqlConnectionStringBuilder(Configuration.GetConnectionString("cloudProdConnection"))
